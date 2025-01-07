@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div style="height:150px;background-color:aquamarine;font-size:40px">Header</div>
+
+    <div style="background-color:cadetblue;">
+        @RenderSection("HeaderSection", required: false)
+        </div>
+         
+    <div style="height:300px;background-color:burlywood;font-size:40px >
+        @RenderBody()
+    </div>
+    <div style="height:50px;background-color:aquamarine;font-size:40px>Footer</div>
+
+        <div style="background-color:aquamarine">
+            @RenderSection("FooterSection", required: false) 
+        </div>
+</body>
+</html>

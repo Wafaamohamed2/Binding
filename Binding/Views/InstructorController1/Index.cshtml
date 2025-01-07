@@ -1,0 +1,39 @@
+﻿@using MVC_1.Models
+@model List<Instructor>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<a href="/InstructorController1/New ">Add New Instructor</a>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Cources</th>
+        <th>Department</th>
+        
+    </tr>
+    @if (Model != null)
+    {
+        @foreach(var item in Model)
+        {
+            
+      
+        
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Instructor_Name</td>
+                <td>@item.Courses</td>
+                <td>@item.Department</td>
+            </tr>
+        }
+
+
+
+    }
+    else
+    {
+        <p>No Instructors available.</p>
+    }</table>
+

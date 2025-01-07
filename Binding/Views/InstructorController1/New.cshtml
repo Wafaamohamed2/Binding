@@ -1,0 +1,30 @@
+﻿@using MVC_1.Models
+@model InstDeptModel
+@{
+    ViewData["Title"] = "New";
+}
+
+<h1>New</h1>
+
+<form method="post" action="/InstructorController1/SaveData">
+    <div>
+        <label asp-for="Instructor_Name"></label>
+        <input asp-for="Instructor_Name" class="form-control" required />
+    </div>
+
+    <div>
+        <label asp-for="Courses"></label>
+        <input asp-for="Courses" class="form-control" required />
+    </div>
+
+    <div>
+        <label asp-for="DepartmentId"></label>
+        <input asp-for="DepartmentId" class="form-control" required />
+    </div>
+
+    <div>
+        <input type="submit" value="Add" class="btn btn-success" />
+    </div>
+</form>
+
+<a href="/InstructorController1/Index">Back to List</a>

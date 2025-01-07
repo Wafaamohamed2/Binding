@@ -1,0 +1,34 @@
+﻿@using MVC_1.Models
+@model List<Employee>
+@{
+    ViewData["Title"] = "Index1";
+}
+
+<h1>Index1</h1>
+<a asp-action="New">NEW</a>
+<table class="table table-bordered table-hover">
+    <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Salary</th>
+    </tr>
+
+    @if(Model != null){
+        foreach(var item in Model){
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Salary</td>
+
+                <td><a href="/EmployeeController1/Edit/@item.Id">Edit</a></td>
+            </tr>
+        }
+    }
+    else
+    {
+        <p>No employees available.</p>
+    }
+
+
+
+</table>
