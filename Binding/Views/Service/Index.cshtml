@@ -1,0 +1,10 @@
+﻿@using Binding.Repository
+@inject IDepartmentRepository deptRepo
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<h3>Id from Controller @ViewBag.Id</h3>
+<hr />
+<h3>Id from View @deptRepo.Id</h3>

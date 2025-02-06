@@ -1,4 +1,5 @@
 ﻿using Binding.Models;
+using Binding.Repository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC_1.Models;
@@ -7,17 +8,23 @@ namespace Binding.Controllers
 {
     public class DepartmentController : Controller
     {
-        FristEntity context = new FristEntity();
+        //  FristEntity context = new FristEntity();
+        IEmployeeRepository EmpRepo;
+        IDepartmentRepository DeptRepo;
 
-     
-
+        public DepartmentController(IEmployeeRepository employee , IDepartmentRepository department ) // Inject EmployeeRepository and DepartmentRepository
+        {
+            EmpRepo = employee;
+            DeptRepo = department;
+            
+        }
 
 
 
         public IActionResult Index()
         {
 
-            var departments = context.departments.ToList();
+            var departments = DeptRepo.GetAll();
             return View(departments);
         }
 
@@ -42,8 +49,8 @@ namespace Binding.Controllers
                     dept.ManagerName = "Default Manager";
                 }
 
-                context.departments.Add(dept);
-                context.SaveChanges();
+              DeptRepo.Create(dept);
+             DeptRepo.Save();  //save data in database
 
                 //call Index method to show all departments then return it
                 return RedirectToAction("Index");  // this is an action method call anthor action method

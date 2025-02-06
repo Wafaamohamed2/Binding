@@ -1,4 +1,5 @@
 ﻿using Binding.Models;
+using Binding.Repository;
 using Microsoft.AspNetCore.Mvc;
 using MVC_1.Models;
 
@@ -6,12 +7,21 @@ namespace Binding.Controllers
 {
     public class EmployeeController1 : Controller
     {
-        FristEntity context = new FristEntity();
+      //  FristEntity context = new FristEntity();
+
+        IEmployeeRepository EmpRepo;
+        IDepartmentRepository DeptRepo;
+
+        public EmployeeController1(IDepartmentRepository deptrep , IEmployeeRepository emprep  )  //Injecting DepartmentRepository and EmployeeRepository
+        {
+            EmpRepo = emprep;
+            DeptRepo = deptrep;
+        }
 
 
         public IActionResult New()
         {
-            ViewData["DeptList"] = context.departments.ToList();
+            ViewData["DeptList"] = DeptRepo.GetAll();
             return View("New");
         }
 
@@ -21,8 +31,8 @@ namespace Binding.Controllers
                 // custom validation dept_id !=0
                 if (emp.Dept_Id != 0) {
 
-                 context.Employees.Add(emp);
-                context.SaveChanges();
+                 EmpRepo.Create(emp);
+                EmpRepo.Save();
                 return RedirectToAction("Index1"); 
                 }
                 else
@@ -32,18 +42,18 @@ namespace Binding.Controllers
                 }
                
             }
-            ViewData["DeptList"] = context.departments.ToList();
+            ViewData["DeptList"] =DeptRepo.GetAll();
             return View("New" , emp); 
         }
         public IActionResult Index1()
         {
-            return View("Index1", context.Employees.ToList());
+            return View("Index1",EmpRepo.GetAll());
         }
 
         public IActionResult Edit(int id) {
 
-            Employee employee = context.Employees.FirstOrDefault(e => e.Id == id);
-            List<Department> departmentsList = context.departments.ToList();
+            Employee employee = EmpRepo.GetById(id);
+            List<Department> departmentsList = DeptRepo.GetAll();
 
             //-------create a new object of EmpDeptModel
             EmpDeptModel empViewModelcs = new EmpDeptModel();
@@ -66,7 +76,7 @@ namespace Binding.Controllers
         public IActionResult SaveEdit(EmpDeptModel empViewModelcs)
         {
 
-            var existingEmployee = context.Employees.FirstOrDefault(e => e.Id == empViewModelcs.Id);
+            var existingEmployee = new Employee();
             if (existingEmployee != null)
             {
                 existingEmployee.Name = empViewModelcs.Name;
@@ -74,14 +84,16 @@ namespace Binding.Controllers
                 existingEmployee.Address = empViewModelcs.Address;
                 existingEmployee.Image = empViewModelcs.Image;
                 existingEmployee.Dept_Id = empViewModelcs.Dept_Id;
+                existingEmployee.Id = empViewModelcs.Id;
 
-                context.SaveChanges();
+               EmpRepo.Update(existingEmployee);
+                EmpRepo.Save();
                 return RedirectToAction("Index1");
 
 
             }
             // if employee not take name or name is empty then return to edit view
-             empViewModelcs.DeptList = context.departments.ToList();
+             empViewModelcs.DeptList =DeptRepo.GetAll();
              return View("Edit", empViewModelcs);
         }
 
