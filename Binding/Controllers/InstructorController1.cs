@@ -5,18 +5,25 @@ using MVC_1.Models;
 namespace Binding.Controllers
 {
     public class InstructorController1 : Controller
+
     {
-        FristEntity context = new FristEntity();
+        FristEntity _context;
+        public InstructorController1(FristEntity context)
+        {
+            _context = context;
+        }
+
+       
         public IActionResult Index()
         {
-            var instructors = context.Instructor.ToList(); 
+            var instructors = _context.Instructor.ToList(); 
 
             return View(instructors);
         }
 
         public IActionResult New()
         {
-            var departmentsList = context.departments.ToList();
+            var departmentsList = _context.departments.ToList();
             var viewModel = new InstDeptModel
             {
                 DeptList = departmentsList
@@ -29,13 +36,13 @@ namespace Binding.Controllers
 
             if (ModelState.IsValid)
             {
-                context.Instructor.Add(inst);
-                context.SaveChanges();
+                _context.Instructor.Add(inst);
+                _context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             // If the model is invalid, return to the form with validation errors
-            var departmentsList = context.departments.ToList();
+            var departmentsList = _context.departments.ToList();
             var viewModel = new InstDeptModel
             {
                 Instructor_Name = inst.Instructor_Name,

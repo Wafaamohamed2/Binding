@@ -5,12 +5,12 @@ namespace Binding.Repository
 {
     public class DepartmentRepository : IDepartmentRepository
     {
-        FristEntity context ;
+      private readonly  FristEntity _context ;
 
       public string Id { get; set; }
-        public DepartmentRepository()
+        public DepartmentRepository(FristEntity context)
         {
-            context = new FristEntity();
+            _context = context; 
             Id = Guid.NewGuid().ToString();  // unique id
         }
 
@@ -19,28 +19,28 @@ namespace Binding.Repository
 
         public void Create(Department dept)
         {
-            context.departments.Add(dept);
+            _context.departments.Add(dept);
            
         }
         public void Update(Department dept)
         {
-            context.departments.Update(dept);
+            _context.departments.Update(dept);
         }
         public void Delete(Department dept)
         {
-            context.departments.Remove(dept);
+            _context.departments.Remove(dept);
         }
         public List<Department> GetAll()
         {
-            return context.departments.ToList();
+            return _context.departments.ToList();
         }
         public Department GetById(int id)
         {
-            return context.departments.FirstOrDefault(d => d.Id == id);
+            return _context.departments.FirstOrDefault(d => d.Id == id);
         }
         public void Save()
         {
-            context.SaveChanges();
+            _context.SaveChanges();
         }
     }
 }

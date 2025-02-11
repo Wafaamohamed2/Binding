@@ -1,5 +1,6 @@
 ﻿using Binding.Models;
 using Binding.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC_1.Models;
@@ -20,7 +21,7 @@ namespace Binding.Controllers
         }
 
 
-
+        [Authorize]
         public IActionResult Index()
         {
 

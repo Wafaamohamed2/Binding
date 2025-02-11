@@ -1,4 +1,6 @@
 using Binding.Repository;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.EntityFrameworkCore;
 using MVC_1.Models;
 using System.Configuration;
@@ -21,7 +23,16 @@ builder.Services.AddSession(options =>
 // Custom service  "Register" 
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
-
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(Option=>
+{
+    // Password policy
+    Option.Password.RequiredLength = 6;
+    Option.Password.RequireNonAlphanumeric = false;
+    Option.Password.RequireUppercase = false;
+    Option.Password.RequireDigit = false;
+    Option.Password.RequireLowercase = false;   
+}
+).AddEntityFrameworkStores<FristEntity>();
 var app = builder.Build();
 
 
@@ -41,13 +52,15 @@ app.UseRouting();
 
 app.UseSession();
 
+app.UseAuthentication();  //to check the user is login or not
+
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
     name: "default",
-        pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 });
 
 app.Run();

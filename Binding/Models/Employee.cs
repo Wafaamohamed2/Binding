@@ -10,7 +10,7 @@ namespace MVC_1.Models
         public int Id { get; set; }
         [Required(ErrorMessage = "Name is required")]
 
-        [UniqueName]
+       
         // Custom validation client side
       [Remote(action:"checkName" ,controller: "EmployeeController1", ErrorMessage ="Nmae must contain Eg")]
         public string Name { get; set; }

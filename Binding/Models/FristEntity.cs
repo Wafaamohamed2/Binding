@@ -1,18 +1,16 @@
 ﻿using Binding.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 
 namespace MVC_1.Models
 {
-    public class FristEntity : DbContext
+    public class FristEntity : IdentityDbContext<ApplicationUser>
 
     {
-        public FristEntity(): base() {
-        }
-
-        public FristEntity(DbContextOptions options) : base(options)
+        public FristEntity(DbContextOptions<FristEntity> options)
+        : base(options)
         {
-
         }
 
 

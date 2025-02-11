@@ -6,14 +6,19 @@ namespace Binding.Models
     // Custom Validator affect server side
     public class UniqueNameAttribute : ValidationAttribute
     {
+        private readonly IServiceScopeFactory _scopeFactory;
+
+        public UniqueNameAttribute(IServiceScopeFactory scopeFactory)
+        {
+            _scopeFactory = scopeFactory;
+        }
+
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value != null)
+            using (var scope = _scopeFactory.CreateScope())
             {
-                string Newname = value.ToString();
-                FristEntity context = new FristEntity();
-                Employee emp = context.Employees.FirstOrDefault(s=>s.Name == Newname);
-                if (emp != null)
+                var context = scope.ServiceProvider.GetRequiredService<FristEntity>();
+                if (context.Employees.Any(s => s.Name == value.ToString()))
                 {
                     return new ValidationResult("Name Must Be Unique");
                 }
@@ -21,4 +26,5 @@ namespace Binding.Models
             return ValidationResult.Success;
         }
     }
+
 }
