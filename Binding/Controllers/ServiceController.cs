@@ -6,6 +6,28 @@ namespace Binding.Controllers
 {
     public class ServiceController : Controller
     {
+        //Service/Add
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return Content("Add1");
+        }
+
+        //Service/Add?ss==11
+        [HttpPost]
+        public IActionResult Add(string ss)
+        {
+            return Content("Add2");
+        }
+
+
+
+
+
+
+
+
+
         private readonly IDepartmentRepository deptRepo;
 
         public IActionResult TestAutho()
@@ -17,6 +39,8 @@ namespace Binding.Controllers
                 // return cliems of user depend on the type of claim
              Claim IDClaim =  User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
                 string id = IDClaim.Value;
+
+                Claim AddressClaim = User.Claims.FirstOrDefault(c => c.Type == "UserAddress");
 
 
                string name = User.Identity.Name;

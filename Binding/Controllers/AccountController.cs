@@ -1,6 +1,7 @@
 ﻿using Binding.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Binding.Controllers
 {
@@ -25,6 +26,7 @@ namespace Binding.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveRegister(RegisterUserViewModel UserViewModel)
         {
             if (ModelState.IsValid) {
@@ -45,8 +47,14 @@ namespace Binding.Controllers
 
                 if (result.Succeeded)
                 {
+
+                    //assign to role
+                    await userManager.AddToRoleAsync(appuser, "Admin");
+
+
+
                     //Cookie 
-                   await signIn.SignInAsync(appuser , false);
+                    await signIn.SignInAsync(appuser , false);
 
                     return RedirectToAction("Index", "Department");
                 }
@@ -71,6 +79,7 @@ namespace Binding.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> SaveLogIn(LoginUserViewModel userViewModel , string returnUrl =null)
         {
             if (ModelState.IsValid)
@@ -85,9 +94,17 @@ namespace Binding.Controllers
                     bool isPasswordValid = await userManager.CheckPasswordAsync(appUser, userViewModel.Password);// for hashing password and check it 
 
                     if (isPasswordValid == true) {
+
+                     
+
                        //create cookie
 
-                        await signIn.SignInAsync(appUser, userViewModel.RememberMe);
+                        List<Claim> claims = new List<Claim>();   // for add more information in cookie
+                        claims.Add(new Claim("UserAddress" , appUser.Address));
+
+                        await signIn.SignInWithClaimsAsync(appUser, userViewModel.RememberMe, claims);
+
+                      //  await signIn.SignInAsync(appUser, userViewModel.RememberMe);
 
                         if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                         {
