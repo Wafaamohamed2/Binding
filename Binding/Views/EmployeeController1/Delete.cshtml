@@ -1,0 +1,12 @@
+﻿@using MVC_1.Models
+@model Employee
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+    <partial name="EmpCard"  />
+
+<a href="/Employee/Index">Backe To List</a>
+<a href="/Employee/ConfirmDelete/@Model.Id">Confirm Delete</a>

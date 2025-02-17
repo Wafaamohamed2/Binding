@@ -97,12 +97,29 @@ namespace Binding.Controllers
              return View("Edit", empViewModelcs);
         }
 
+        public IActionResult Details(int id) { 
+             var employee = EmpRepo.GetById(id);
+            return View(employee);
+        }
+
+        // calling using ajax "patial request"
+        public IActionResult EmpCard(int id) {
+
+            return PartialView("EmpCard", EmpRepo.GetById(id));
+        
+        }
+        public IActionResult Delete(int id)
+        {
+            return View("Delete", EmpRepo.GetById(id));
+        }
+
         // Remote Attribute using Ajax Call
         public IActionResult checkName(string Name) {
             if (Name.Contains("Eg"))
-                return Json(true);
+                return Json(true); 
             
             return Json(false);
+
 
         }
 

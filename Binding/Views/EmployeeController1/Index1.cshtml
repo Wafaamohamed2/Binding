@@ -6,6 +6,7 @@
 
 <h1>Index1</h1>
 <a asp-action="New">NEW</a>
+<div id=" div3" style="border:2px solid blue"></div>
 <table class="table table-bordered table-hover">
     <tr>
     <th>ID</th>
@@ -21,6 +22,8 @@
                 <td>@item.Salary</td>
 
                 <td><a href="/EmployeeController1/Edit/@item.Id">Edit</a></td>
+
+                <td><a href="/EmployeeController1/EmpCard/@item.Id " onclick="GetEmpData(event,@item.Id)">Details</a></td>
             </tr>
         }
     }
@@ -32,3 +35,23 @@
 
 
 </table>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<script>
+        function GetEmpData(event,id) {
+            event.preventDefault();
+            $.ajax({
+            url: "/EmployeeController1/EmpCard/" + id,
+               
+                
+                success: function (result) {
+                    console.log(result)
+                    $("#div3").html(result);
+                }
+            });
+       
+    }
+</script>
