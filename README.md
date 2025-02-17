@@ -96,27 +96,28 @@
 
    
 # Views
-  1. Index.cshtml
+  1. Index.cshtml :
    - Displays tables for departments, employees, and instructors with sorting and filtering options.
    - Uses AJAX to dynamically load employee details in a partial view (EmpCard.cshtml).
      
-  3. New.cshtml
+  3. New.cshtml :
       Provides structured forms for adding new departments, employees, and instructors, with 
       dynamic data binding for dropdowns.
      
-  4. Edit.cshtml:
+  4. Edit.cshtml :
        Allows modification of existing records while ensuring proper validation and relational data 
        integrity.
      
-  5. LogIn.cshtml:
+  5. LogIn.cshtml :
        Displays the login form with fields for username, password, and a "Remember Me" option.
      
-  7. Register.cshtml:
+  7. Register.cshtml :
        Displays the registration form with fields for username, password, confirm password, and address.
      
-  9. AddRole.cshtml: Displays the form for adding a new role.
+  9. AddRole.cshtml :
+       Displays the form for adding a new role.
 
-  10. 4. Details.cshtml:
+  11. 4. Details.cshtml :
        Displays detailed information about an employee using the EmpCard partial view.
 
  
