@@ -70,38 +70,56 @@
          ~ LogOut Action: Logs the user out and redirects to the login page.
 
 
-  # 6. Role Management (RoleController)
+  # 6. Role Management (RoleController) :
    The RoleController manages role-related operations and is accessible only to users in the "Admin" role.
    
    - Add Role: AddRole Action: Displays the form for adding a new role.
    - SaveRole Action: Validates and saves a new role to the database.
    - View: AddRole.cshtml provides the form for adding roles.
 
-  # 7. Authorization and Claims (ServiceController)
+  # 7. Authorization and Claims (ServiceController) :
    The ServiceController demonstrates how to access user claims and perform role-based authorization.
-    - TestAutho Action: Checks if the user is authenticated and retrieves user claims such as NameIdentifier and custom claims like UserAddress.
+    - TestAutho Action: Checks if the user is authenticated and retrieves user claims such as NameIdentifier and custom 
+      claims like UserAddress.
     - View: Displays a welcome message with the user's name and ID.
+
+  # 8. Partial Views and AJAX :
+   - Partial View (EmpCard.cshtml): A reusable component for displaying employee details. It is used in both the 
+     Details.cshtml and Index1.cshtml views.
+
+   - AJAX Integration: The EmpCard action is called via AJAX in Index1.cshtml to dynamically load employee details without 
+     refreshing the page.
     
-  # 8. Database Migration (20250211084635_Autho.cs) :
-   The project includes a database migration file (20250211084635_Autho.cs) that sets up the necessary tables for user authentication,
-   including AspNetUsers, AspNetRoles, and related tables for managing roles, claims, and user tokens.   
+  # 9. Database Migration (20250211084635_Autho.cs) :
+   The project includes a database migration file (20250211084635_Autho.cs) that sets up the necessary tables for user 
+   authentication, including AspNetUsers, AspNetRoles, and related tables for managing roles, claims, and user tokens.   
 
    
 # Views
   1. Index.cshtml
-    Displays tables for departments, employees, and instructors with sorting and filtering options.
-  2. New.cshtml
+   - Displays tables for departments, employees, and instructors with sorting and filtering options.
+   - Uses AJAX to dynamically load employee details in a partial view (EmpCard.cshtml).
+     
+  3. New.cshtml
       Provides structured forms for adding new departments, employees, and instructors, with 
       dynamic data binding for dropdowns.
-  3. Edit.cshtml:
+     
+  4. Edit.cshtml:
        Allows modification of existing records while ensuring proper validation and relational data 
        integrity.
-  4. LogIn.cshtml:
+     
+  5. LogIn.cshtml:
        Displays the login form with fields for username, password, and a "Remember Me" option.
-  5. Register.cshtml:
+     
+  7. Register.cshtml:
        Displays the registration form with fields for username, password, confirm password, and address.
-  6. AddRole.cshtml: Displays the form for adding a new role.
-         
+     
+  9. AddRole.cshtml: Displays the form for adding a new role.
+
+  10. 4. Details.cshtml:
+       Displays detailed information about an employee using the EmpCard partial view.
+
+ 
 # Key Concepts 
 
   - Model Binding: Automatically maps request data to parameters or model objects in controller 
