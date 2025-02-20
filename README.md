@@ -149,3 +149,4 @@
 # Sammary :
    This project is a comprehensive example of how to build an ASP.NET Core MVC application with model binding, CRUD operations, user authentication and role management. 
    It serves as a valuable resource for developers looking to understand these concepts in practice.
+   The addition of AJAX-based employee loading and custom routing further enhances the application's functionality and user experience.
