@@ -40,5 +40,10 @@ namespace Binding.Repository
         {
             context.SaveChanges();
         }
+
+        public List<Employee> GetEmpsByDeptId(int deptid)
+        {
+            return context.Employees.Where(e => e.Dept_Id == deptid).ToList();
+        }
     }
 }

@@ -29,6 +29,20 @@ namespace Binding.Controllers
             return View(departments);
         }
 
+        public IActionResult DeptEmps()
+        {
+            return View("DeptEmps" , DeptRepo.GetAll());
+        }
+
+
+        // get all employees by department id  .. /Department/GetEmpsByDeptId?deptid=1  
+        public IActionResult GetEmpsByDeptId(int deptid)
+        {
+            List<Employee> emps = EmpRepo.GetEmpsByDeptId(deptid);
+
+            return Json(emps);
+
+        }
 
         // anchor tag .. open empty form
         [HttpGet] //default is get method of form || anchor tag

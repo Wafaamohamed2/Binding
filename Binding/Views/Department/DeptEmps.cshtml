@@ -1,0 +1,48 @@
+﻿@model List<Department>
+@{
+    ViewData["Title"] = "DeptEmps";
+}
+
+<h1>DeptEmps</h1>
+
+
+<select id="DeptId" name="DeptId" class="form form-controller">
+    @foreach (var dept in Model)
+    {
+        <option value="@dept.Id">@dept.Name</option>
+    }
+    </select>
+
+    <br />
+
+<select id="Emps" name="Emps" class="form form-controller" onchange="GetEmp()">
+
+    </select>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+
+    <script>
+
+        function GetEmp() {
+            var deptId = document.getElementById("DeptId").value;
+            console.log(deptId);
+            console.log("hi");
+
+            var emps = document.getElementById("Emps");
+            emps.innerHTML = "";
+            @* Ajax call json*@
+
+                $.ajax({
+
+
+                url: "/Department/GetEmpsByDeptId?deptId" + deptId,
+                    success: function (result) {
+                        console.log(result);
+                        for (let emp in result) {
+                            emps.innerHTML += "<option value='" + emp.Id + "'>" + emp.Name + "</option>";
+                        }
+                    }
+                })
+        }
+    </script>

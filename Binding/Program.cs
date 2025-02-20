@@ -56,6 +56,28 @@ app.UseAuthentication();  //to check the user is login or not
 
 app.UseAuthorization();
 
+
+//Declare and excute the route
+// nameing convention rote (Define route with name , pattern , default)
+//constraint
+//optional segment but be the last segment
+
+
+//app.MapControllerRoute("Route1" , "R1/{name}/{age:int}/{color?}" ,
+//    new {controller ="Route" , action = "Method1" });
+
+//app.MapControllerRoute("Route2", "R2",
+//    new { controller = "Route", action = "Method2" });
+
+
+//one route for all action method for controller
+app.MapControllerRoute("Route1", "R/{action=Method1}",
+    new { controller = "Route"});
+
+
+app.MapControllerRoute("Route1", "{controller=Route} /{ Action=Method1}");
+  
+
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(

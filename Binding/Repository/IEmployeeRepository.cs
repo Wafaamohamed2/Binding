@@ -20,6 +20,8 @@ namespace Binding.Repository
 
 
         public void Save();
+
+        public List<Employee> GetEmpsByDeptId(int deptid);
         
     }
 }
