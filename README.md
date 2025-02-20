@@ -94,6 +94,10 @@
    The project includes a database migration file (20250211084635_Autho.cs) that sets up the necessary tables for user 
    authentication, including AspNetUsers, AspNetRoles, and related tables for managing roles, claims, and user tokens.   
 
+  # 10. Route Management (RouteController) :
+   The RouteController demonstrates custom routing and URL generation.
+    Method1: Example of a default route.
+    Method2: Example of a named route.
    
 # Views
   1. Index.cshtml :
@@ -117,9 +121,11 @@
   9. AddRole.cshtml :
        Displays the form for adding a new role.
 
-  11. 4. Details.cshtml :
+  10. Details.cshtml :
        Displays detailed information about an employee using the EmpCard partial view.
 
+  11. DeptEmps.cshtml :
+      Displays a dropdown for selecting departments and dynamically loads employees via AJAX.
  
 # Key Concepts 
 
@@ -138,7 +144,7 @@
   - Authentication: Implements user registration, login, and logout using ASP.NET Core Identity.  
   - Role-Based Authorization: Restricts access to certain controllers and actions based on user roles.
   - Claims-Based Authorization: Adds custom claims to the user's identity for more granular access control.
-
+  - AJAX Integration: Dynamically loads data without refreshing the page, improving user experience.
     
 # Sammary :
    This project is a comprehensive example of how to build an ASP.NET Core MVC application with model binding, CRUD operations, user authentication and role management. 
